@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
-        primarySwatch: Colors.blueGrey,
+        useMaterial3: true,
+        // primarySwatch: Colors.blueGrey,
       ),
       home: const MyHomePage(title: 'Live Scene Description'),
     );
@@ -31,11 +32,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  String _text = 'here';
 
-  void _incrementCounter() {
+  void _updateText() {
     setState(() {
-      _counter++;
+      _text = 'hello World!';
     });
   }
 
@@ -50,18 +51,18 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'You have pushed the button this many times:',
+              'Generated text will appear here:',
             ),
             Text(
-              '$_counter',
+              '$_text',
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        onPressed: _updateText,
+        tooltip: 'Update Text',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
