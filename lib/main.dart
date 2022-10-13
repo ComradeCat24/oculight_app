@@ -4,6 +4,23 @@ void main() {
   runApp(const MyApp());
 }
 
+class ElevatedCardExample extends StatelessWidget {
+  const ElevatedCardExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Card(
+        child: SizedBox(
+          width: 300,
+          height: 500,
+          child: Center(child: Text('<Camera> Card')),
+        ),
+      ),
+    );
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -32,13 +49,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String _text = 'here';
+  String _text = '<Text>';
 
-  void _updateText() {
-    setState(() {
-      _text = 'hello World!';
-    });
-  }
+  // void _updateText() {
+  //   setState(() {
+  //     _text = 'hello World!';
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -48,23 +65,16 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            const Text(
-              'Generated text will appear here:',
-            ),
+            const ElevatedCardExample(),
             Text(
-              '$_text',
+              _text,
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _updateText,
-        tooltip: 'Update Text',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
