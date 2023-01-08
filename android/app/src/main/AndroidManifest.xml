@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.scene_desc">
+    package="com.example.oculight">
   <!-- Adding permissions for TTS -->
   <queries>
         <package android:name="com.google.android.googlequicksearchbox"/>
@@ -8,7 +8,7 @@
         </intent>
     </queries>
    <application
-        android:label="scene_desc"
+        android:label="oculight"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

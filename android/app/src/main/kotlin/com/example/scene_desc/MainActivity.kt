@@ -1,4 +1,4 @@
-package com.example.scene_desc
+package com.example.oculight
 
 import io.flutter.embedding.android.FlutterActivity
 
