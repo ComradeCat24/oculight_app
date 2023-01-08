@@ -1,5 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.scene_desc">
+  <!-- Adding permissions for TTS -->
+  <queries>
+        <package android:name="com.google.android.googlequicksearchbox"/>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
+    </queries>
    <application
         android:label="scene_desc"
         android:name="${applicationName}"
