@@ -1,22 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:text_to_speech/text_to_speech.dart';
+import 'package:translator/translator.dart';
 
-class ElevatedCard extends StatelessWidget {
-  const ElevatedCard({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Card(
-        child: SizedBox(
-          width: 300,
-          height: 500,
-          child: Center(child: Text('<Camera> Card')),
-        ),
-      ),
-    );
-  }
-}
+import '../widgets/camera.dart';
+import '../widgets/caption.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -26,19 +13,28 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  // String _text = '<Text>';
-  final String _text = 'This is out final year project.';
-
-  // void _updateText() {
-  //   setState(() {
-  //     _text = 'hello World!';
-  //   });
-  // }
-
   TextToSpeech tts = TextToSpeech();
+  final translator = GoogleTranslator();
+
+  // String _text = '<Text>';
+  String enCaption = 'This is out final year project.';
+
+  String hiCaption = '';
+
+  @override
+  void initState() {
+    super.initState();
+
+    translator
+        .translate(enCaption, to: 'hi')
+        .then((value) => hiCaption = value.text);
+  }
 
   void _speak(String text) {
     tts.setVolume(1);
+    // String language = 'hi-IN';
+    String language = 'en-IN';
+    tts.setLanguage(language);
     tts.speak(text);
   }
 
@@ -50,19 +46,17 @@ class _HomeState extends State<Home> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            const ElevatedCard(),
-            Text(
-              _text,
-              style: Theme.of(context).textTheme.headline4,
-            ),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Camera(),
+            const SizedBox(height: 100),
+            Caption(enCaption: enCaption, hiCaption: hiCaption),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _speak(_text);
+          _speak(enCaption);
         },
         tooltip: 'TTS',
         child: const Icon(Icons.surround_sound),
