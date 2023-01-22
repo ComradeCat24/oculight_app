@@ -1,25 +1,12 @@
 import 'package:flutter/material.dart';
-
-<<<<<<< HEAD
-abstract class TranslateAPI {
-  Future<Translation> translate(String text, {to});
-}
-
-class GoogleTranslateAPI implements TranslateAPI {
-  final translator = GoogleTranslator();
-
-  @override
-  Future<Translation> translate(String text, {to}) {
-    return translator.translate(text, to: to);
-  }
-}
+import 'package:translator/translator.dart';
 
 class Caption extends StatefulWidget {
-  Caption({super.key, required this.captionText, required this.translateAPI});
+  Caption({super.key, required this.captionText});
+  final translator = GoogleTranslator();
 
   String captionText;
   bool isEnglish = true;
-  final TranslateAPI translateAPI;
 
   @override
   _CaptionState createState() => _CaptionState();
@@ -28,34 +15,33 @@ class Caption extends StatefulWidget {
 class _CaptionState extends State<Caption> {
   void translate() async {
     final targetLanguage = widget.isEnglish ? 'en' : 'hi';
-    final Translation translation = await widget.translateAPI
+    final Translation translation = await widget.translator
         .translate(widget.captionText, to: targetLanguage);
     setState(() {
       widget.captionText = translation.text;
-      widget.isEnglish = !widget.isEnglish;
+      widget.isEnglish = !widget.isEnglish; // added this
     });
   }
-=======
-class Caption extends StatelessWidget {
-  const Caption({super.key, required this.enCaption, required this.hiCaption});
-
-  final String enCaption;
-  final String hiCaption;
->>>>>>> parent of 34f469e (:globe_with_meridians: implimented translation)
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        Text(
-          enCaption,
-          style: Theme.of(context).textTheme.headline5,
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          child: Text(
+            widget.captionText,
+            key: ValueKey(widget.captionText),
+            style: Theme.of(context).textTheme.headline5,
+          ),
         ),
-        const SizedBox(height: 20),
-        Text(
-          hiCaption,
-          style: Theme.of(context).textTheme.headline5,
+        const SizedBox(height: 50),
+        ElevatedButton(
+          onPressed: () {
+            translate();
+          },
+          child: Icon(widget.isEnglish ? Icons.language : Icons.translate),
         ),
       ],
     );
