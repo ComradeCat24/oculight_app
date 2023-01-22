@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:translator/translator.dart';
 
+<<<<<<< HEAD
 abstract class TranslateAPI {
   Future<Translation> translate(String text, {to});
 }
@@ -35,26 +35,27 @@ class _CaptionState extends State<Caption> {
       widget.isEnglish = !widget.isEnglish;
     });
   }
+=======
+class Caption extends StatelessWidget {
+  const Caption({super.key, required this.enCaption, required this.hiCaption});
+
+  final String enCaption;
+  final String hiCaption;
+>>>>>>> parent of 34f469e (:globe_with_meridians: implimented translation)
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        AnimatedSwitcher(
-          duration: const Duration(milliseconds: 300),
-          child: Text(
-            widget.captionText,
-            key: ValueKey(widget.captionText),
-            style: Theme.of(context).textTheme.headline5,
-          ),
+        Text(
+          enCaption,
+          style: Theme.of(context).textTheme.headline5,
         ),
-        const SizedBox(height: 50),
-        ElevatedButton(
-          onPressed: () {
-            translate();
-          },
-          child: Icon(widget.isEnglish ? Icons.language : Icons.translate),
+        const SizedBox(height: 20),
+        Text(
+          hiCaption,
+          style: Theme.of(context).textTheme.headline5,
         ),
       ],
     );

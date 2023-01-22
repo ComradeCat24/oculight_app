@@ -14,8 +14,21 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   TextToSpeech tts = TextToSpeech();
+  final translator = GoogleTranslator();
 
-  String captionText = 'This is out final year project.';
+  // String _text = '<Text>';
+  String enCaption = 'This is out final year project.';
+
+  String hiCaption = '';
+
+  @override
+  void initState() {
+    super.initState();
+
+    translator
+        .translate(enCaption, to: 'hi')
+        .then((value) => hiCaption = value.text);
+  }
 
   void _speak(String text) {
     tts.setVolume(1);
@@ -37,15 +50,16 @@ class _HomeState extends State<Home> {
           children: [
             const Camera(),
             const SizedBox(height: 100),
-            Caption(captionText: captionText),
-            const SizedBox(height: 40),
-            ElevatedButton(
-                onPressed: () {
-                  _speak(captionText);
-                },
-                child: const Icon(Icons.transcribe_rounded)),
+            Caption(enCaption: enCaption, hiCaption: hiCaption),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _speak(enCaption);
+        },
+        tooltip: 'TTS',
+        child: const Icon(Icons.surround_sound),
       ),
     );
   }
