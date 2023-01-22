@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData.dark(), // standard dark theme
       themeMode: ThemeMode.system, // device controls theme
       debugShowCheckedModeBanner: false,
-      home: const Home(),
+      home: Home(),
     );
   }
 }
