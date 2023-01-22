@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:text_to_speech/text_to_speech.dart';
 import 'package:translator/translator.dart';
 
+// ignore: must_be_immutable
 class Caption extends StatefulWidget {
-  Caption({super.key, required this.captionText});
+  Caption({super.key});
+
   final translator = GoogleTranslator();
   final TextToSpeech tts = TextToSpeech();
 
-  String captionText;
-  bool isEnglish = true;
+  String captionText = 'This is our final year project.';
+  bool isEnglish = false;
 
   @override
+  // ignore: library_private_types_in_public_api
   _CaptionState createState() => _CaptionState();
 }
 
@@ -51,17 +54,26 @@ class _CaptionState extends State<Caption> {
           ),
         ),
         const SizedBox(height: 50),
-        ElevatedButton(
-          onPressed: () {
-            translate();
-          },
-          child: Icon(widget.isEnglish ? Icons.language : Icons.translate),
-        ),
-        ElevatedButton(
-            onPressed: () {
-              speak();
-            },
-            child: const Icon(Icons.transcribe_rounded)),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                translate();
+              },
+              child: Text(
+                widget.isEnglish ? 'A' : 'आ',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+            ),
+            // const SizedBox(width: 0),
+            ElevatedButton(
+                onPressed: () {
+                  speak();
+                },
+                child: const Icon(Icons.transcribe_rounded)),
+          ],
+        )
       ],
     );
   }
