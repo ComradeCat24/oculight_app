@@ -5,7 +5,9 @@ import '../widgets/cameraView.dart';
 import '../widgets/caption.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key, required availableCameras});
+
+  final List<CameraDescription> cameras;
+  const Home({super.key, required this.cameras});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class Home extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const CameraView(camera: availableCameras),
+            CameraView(camera: cameras[0]),
             const SizedBox(height: 50),
             Caption(),
           ],

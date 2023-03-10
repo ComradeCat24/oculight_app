@@ -11,7 +11,9 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key, required List<CameraDescription> cameras});
+  final List<CameraDescription> cameras;
+
+  const MyApp({super.key, required this.cameras});
 
   // This widget is the root of your application.
   @override
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData.dark(), // standard dark theme
       themeMode: ThemeMode.system, // device controls theme
       debugShowCheckedModeBanner: false,
-      home: Home(availableCameras: cameras),
+      home: Home(cameras: cameras),
     );
   }
 }
