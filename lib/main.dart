@@ -1,12 +1,17 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'screens/home.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final List<CameraDescription> cameras = await availableCameras();
+
+  runApp(MyApp(cameras: cameras));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, required List<CameraDescription> cameras});
 
   // This widget is the root of your application.
   @override
@@ -20,7 +25,7 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData.dark(), // standard dark theme
       themeMode: ThemeMode.system, // device controls theme
       debugShowCheckedModeBanner: false,
-      home: Home(),
+      home: Home(availableCameras: cameras),
     );
   }
 }

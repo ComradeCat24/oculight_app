@@ -50,7 +50,7 @@ class _CaptionState extends State<Caption> {
           child: Text(
             widget.captionText,
             key: ValueKey(widget.captionText),
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
         const SizedBox(height: 50),
@@ -63,7 +63,7 @@ class _CaptionState extends State<Caption> {
               },
               child: Text(
                 widget.isEnglish ? 'A' : 'आ',
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
             ),
             // const SizedBox(width: 0),

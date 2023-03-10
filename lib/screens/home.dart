@@ -1,10 +1,11 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/camera.dart';
+import '../widgets/cameraView.dart';
 import '../widgets/caption.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  const Home({super.key, required availableCameras});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class Home extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Camera(),
+            const CameraView(camera: availableCameras),
             const SizedBox(height: 50),
             Caption(),
           ],
