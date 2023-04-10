@@ -1,5 +1,7 @@
+import 'package:Oculight/services/api.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/cameraView.dart';
 import '../widgets/caption.dart';
@@ -10,7 +12,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("cammer : $cameras");
+    ApiServices apiServices = context.watch<ApiServices>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Oculight'),
@@ -21,8 +23,10 @@ class Home extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CameraView(camera: cameras[0]),
-              const SizedBox(height: 50),
-              Caption(),
+              const SizedBox(height: 10),
+              Caption(
+                captionText: apiServices.predictedString,
+              ),
             ],
           ),
         ),

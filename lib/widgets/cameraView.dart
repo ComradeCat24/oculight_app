@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:Oculight/services/api.dart';
 import 'package:camera/camera.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // class Camera extends StatelessWidget {
@@ -52,6 +54,15 @@ class CameraViewState extends State<CameraView> {
     _initializeControllerFuture = _controller.initialize();
   }
 
+  void sendFile(XFile file) async {
+    try {
+      await ApiServices().postReq(file);
+      print("After req");
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
   @override
   void dispose() {
     // Dispose of the controller when the widget is disposed.
@@ -66,7 +77,26 @@ class CameraViewState extends State<CameraView> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           // If the Future is complete, display the preview.
-          return CameraPreview(_controller);
+          return Column(
+            children: [
+              CameraPreview(_controller),
+              const SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                  style: IconButton.styleFrom(fixedSize: const Size(100, 40)),
+                  onPressed: () async {
+                    try {
+                      await _initializeControllerFuture;
+                      final image = await _controller.takePicture();
+                      sendFile(image);
+                    } catch (e) {
+                      debugPrint(e.toString());
+                    }
+                  },
+                  child: const Icon(CupertinoIcons.camera)),
+            ],
+          );
         } else {
           // Otherwise, display a loading indicator.
           return const Center(child: CircularProgressIndicator());

@@ -1,15 +1,18 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:text_to_speech/text_to_speech.dart';
 import 'package:translator/translator.dart';
 
 // ignore: must_be_immutable
 class Caption extends StatefulWidget {
-  Caption({super.key});
+  Caption({super.key, required this.captionText});
+
+  String captionText;
 
   final translator = GoogleTranslator();
   final TextToSpeech tts = TextToSpeech();
 
-  String captionText = 'This is our final year project.';
+  // String captionText = 'This is our final year project.';
   bool isEnglish = false;
 
   @override

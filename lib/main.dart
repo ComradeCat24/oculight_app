@@ -1,5 +1,7 @@
+import 'package:Oculight/services/api.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'screens/home.dart';
 
 late List<CameraDescription> _cameras;
@@ -9,7 +11,8 @@ Future<void> main() async {
 
   _cameras = await availableCameras();
 
-  runApp(MyApp(cameras: _cameras));
+  runApp(ChangeNotifierProvider(
+      create: (context) => ApiServices(), child: MyApp(cameras: _cameras)));
 }
 
 class MyApp extends StatelessWidget {
