@@ -17,18 +17,19 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Oculight'),
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CameraView(camera: cameras[0]),
-              const SizedBox(height: 10),
-              Caption(
-                captionText: apiServices.predictedString,
-              ),
-            ],
-          ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+                padding: const EdgeInsets.all(20),
+                child: CameraView(camera: cameras[0])),
+            const SizedBox(height: 10),
+            Caption(
+              captionText:
+                  apiServices.predictedString,
+            ),
+          ],
         ),
       ),
     );

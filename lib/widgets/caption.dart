@@ -52,8 +52,9 @@ class _CaptionState extends State<Caption> {
           duration: const Duration(milliseconds: 300),
           child: Text(
             widget.captionText,
+            textAlign: TextAlign.center,
             key: ValueKey(widget.captionText),
-            style: Theme.of(context).textTheme.headlineSmall,
+            style: const TextStyle(fontSize: 20),
           ),
         ),
         const SizedBox(height: 50),

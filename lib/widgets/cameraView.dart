@@ -77,24 +77,29 @@ class CameraViewState extends State<CameraView> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           // If the Future is complete, display the preview.
-          return Column(
+          return Stack(
+            alignment: AlignmentDirectional.bottomCenter,
             children: [
               CameraPreview(_controller),
               const SizedBox(
                 height: 10,
               ),
-              ElevatedButton(
-                  style: IconButton.styleFrom(fixedSize: const Size(100, 40)),
-                  onPressed: () async {
-                    try {
-                      await _initializeControllerFuture;
-                      final image = await _controller.takePicture();
-                      sendFile(image);
-                    } catch (e) {
-                      debugPrint(e.toString());
-                    }
-                  },
-                  child: const Icon(CupertinoIcons.camera)),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 15.0),
+                child: ElevatedButton(
+                    style: IconButton.styleFrom(fixedSize: const Size(100, 40)),
+                    onPressed: () async {
+                      try {
+                        await _initializeControllerFuture;
+                        final image = await _controller.takePicture();
+                        sendFile(image);
+                      } catch (e) {
+                        debugPrint(e.toString());
+                      }
+                    },
+                    child: const Icon(CupertinoIcons.camera)),
+              ),
+                  
             ],
           );
         } else {
