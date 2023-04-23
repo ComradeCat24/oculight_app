@@ -4,31 +4,16 @@ import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-// class Camera extends StatelessWidget {
-//   const Camera({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Center(
-//       child: Card(
-//         child: SizedBox(
-//           width: 300,
-//           height: 500,
-//           child: Center(child: Text('<Camera> Card')),
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 // A screen that allows users to take a picture using a given camera.
 class CameraView extends StatefulWidget {
   const CameraView({
     super.key,
-    required this.camera,
+    required this.camera, required this.apiServices,
   });
 
   final CameraDescription camera;
+  final ApiServices apiServices;
 
   @override
   CameraViewState createState() => CameraViewState();
@@ -56,8 +41,7 @@ class CameraViewState extends State<CameraView> {
 
   void sendFile(XFile file) async {
     try {
-      await ApiServices().postReq(file);
-      print("After req");
+      await widget.apiServices.postReq(file);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -99,7 +83,6 @@ class CameraViewState extends State<CameraView> {
                     },
                     child: const Icon(CupertinoIcons.camera)),
               ),
-                  
             ],
           );
         } else {

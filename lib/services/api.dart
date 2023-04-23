@@ -7,23 +7,33 @@ class ApiServices extends ChangeNotifier {
 
   String get predictedString => _predictedString;
 
+  bool isLoading = false;
+
+  setLoading(bool status) {
+    isLoading = status;
+    notifyListeners();
+  }
+
   Future<void> postReq(XFile file) async {
+    setLoading(true);
     String filePath = file.path;
     String fileName = 'imageToString';
 
     try {
       FormData formData = FormData.fromMap({
-        'file': await MultipartFile.fromFile(filePath, filename: fileName),
+        'image': await MultipartFile.fromFile(filePath, filename: fileName),
       });
 
       Response response =
-          await Dio().post("https://localhost:3000/predict", data: formData);
-      print("File upload response: $response");
-      print(response.data['data']);
-      _predictedString = response.data["data"];
+          await Dio().post("http://10.0.2.2:5000/predict", data: formData);
+      debugPrint("File upload response: $response");
+      debugPrint(response.toString());
+      _predictedString = response.toString();
       notifyListeners();
     } catch (e) {
       debugPrint(e.toString());
+    } finally{
+      setLoading(false);
     }
   }
 }

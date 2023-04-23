@@ -27,9 +27,10 @@ class MyApp extends StatelessWidget {
       title: 'Oculight',
       theme: ThemeData(
         useMaterial3: true,
-        primarySwatch: Colors.blueGrey,
       ),
-      darkTheme: ThemeData.dark(), // standard dark theme
+      darkTheme: ThemeData.dark(
+        useMaterial3: true,
+      ), // standard dark theme
       themeMode: ThemeMode.system, // device controls theme
       debugShowCheckedModeBanner: false,
       home: Home(cameras: cameras),
